@@ -26,13 +26,24 @@ $(document).ready(function () {
     }
 
     var userAnswers = [];
+    var userPreferences = [];
     var pantrysize = Object.keys(Pantry).length;
     $("#submit").click(function () {
-
+        $('select').each(function () {
+            userAnswers.push($(this).val());
+            userPreferences.push($(this).attr('name'));
+        });
+        console.log(userAnswers);
         for (i = 0; i < pantrysize; i++) {
             //if the answer to the question is yes then take that id and compare it to the items in the pantry.
             //when you find a match, randomly generate a number and select the pantry item corresponding to that
-
+            var preference = userAnswers[i];
+            $("#my_select").change(function () {
+                var id = $(this).children(":selected").attr("id");
+            });
+            if (preference == "yes") {
+                console.log(Pantry)
+            }
         }
     });
 });
