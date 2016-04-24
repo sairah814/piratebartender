@@ -13,12 +13,15 @@ $(document).ready(function () {
         fruity: ["Slice of orange", "dash of cassis", "cherry on top"]
     }
 
-    function createDrink {
+    function createDrink() {
+        var drink = [];
         for (i = 0; i < userPreferences.length; i++) {
             var preference = userPreferences[i]; //records the preference like "salty"
-            var pantrychoice = randomIndex(2, 0);
-
+            var pantryIndex = randomIndex(2, 0);
+            var choice = Pantry[preference][pantryIndex]; //finds preference key in object and then returns only value at index
+            drink.push(choice);
         }
+        return drink;
         //console.log(pantrychoice);
         //console.log(userAnswers);
         //console.log(userPreferences);
@@ -44,6 +47,7 @@ $(document).ready(function () {
                 index += 1;
             }
         });
+        createDrink();
         //now call the createdrink function
         //then call the display drink function
     });
