@@ -18,24 +18,20 @@ $(document).ready(function () {
         for (i = 0; i < userPreferences.length; i++) {
             var preference = userPreferences[i]; //records the preference like "salty"
             var pantryIndex = randomIndex(2, 0);
-            var choice = Pantry[preference][pantryIndex]; //finds preference key in object and then returns only value at index
-            drink.push(choice);
+            var ingredient = Pantry[preference][pantryIndex]; //finds preference key in object and then returns only value at index
+            drink.push(ingredient);
         }
         return drink;
-        //console.log(pantrychoice);
-        //console.log(userAnswers);
-        //console.log(userPreferences);
-        /*var concoction = [];
-        for (i = 0; i < userPreferences.length; i++) {
-            var preference = userPreferences[i];
-            var pantrychoice = randomIndex(2, 0);
-            console.log(pantrychoice);
-        }*/
+    }
+
+    function displayDrink(ingredients) {
+        for (i = 0; i < ingredients.length; i++) {
+            $("#drink").append("<p>" + ingredients[i] + "</p>");
+        }
     }
 
     var userAnswers = [];
     var userPreferences = [];
-    var pantrysize = Object.keys(Pantry).length;
     $("#submit").click(function () {
         var index = 0;
         $('select').each(function () {
@@ -47,8 +43,7 @@ $(document).ready(function () {
                 index += 1;
             }
         });
-        createDrink();
-        //now call the createdrink function
-        //then call the display drink function
+        var newDrink = createDrink();
+        displayDrink(newDrink);
     });
 });
