@@ -12,9 +12,14 @@ $(document).ready(function () {
 
     */
 
-    function randomIndex(max, min) { //generates a random number between the range provided; will be used to randomly choose an ingredient from each of the pantry categories
-        var index = Math.floor() * (max - min) + min;
-        return index;
+    var randomIndex = function (max, min) { //generates a random number between the range provided; will be used to randomly choose an ingredient from each of the pantry categories
+        var randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+        return randomNumber;
+    }
+
+    function testFunction(text) {
+        var message = "This is the " + text;
+        return message;
     }
 
     var Pantry = {
@@ -29,21 +34,29 @@ $(document).ready(function () {
     var userPreferences = [];
     var pantrysize = Object.keys(Pantry).length;
     $("#submit").click(function () {
+        var index = 0;
         $('select').each(function () {
             userAnswers.push($(this).val());
-            userPreferences.push($(this).attr('name'));
-        });
-        console.log(userAnswers);
-        for (i = 0; i < pantrysize; i++) {
-            //if the answer to the question is yes then take that id and compare it to the items in the pantry.
-            //when you find a match, randomly generate a number and select the pantry item corresponding to that
-            var preference = userAnswers[i];
-            $("#my_select").change(function () {
-                var id = $(this).children(":selected").attr("id");
-            });
-            if (preference == "yes") {
-                console.log(Pantry)
+            if (userAnswers[index] === 'yes') {
+                //console.log(index);
+                userPreferences.push($(this).attr('name'));
+                //console.log("Current preferences are" + userPreferences + "because of " + userAnswers[index]);
+                index += 1;
+            } else {
+                index += 1;
             }
-        }
+        });
+        var pantrychoice = randomIndex(2, 0);
+        console.log(pantrychoice);
+        var testmessage = testFunction("hello");
+        console.log(testmessage);
+        //console.log(userAnswers);
+        //console.log(userPreferences);
+        /*var concoction = [];
+        for (i = 0; i < userPreferences.length; i++) {
+            var preference = userPreferences[i];
+            var pantrychoice = randomIndex(2, 0);
+            console.log(pantrychoice);
+        }*/
     });
 });
